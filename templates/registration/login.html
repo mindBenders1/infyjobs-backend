@@ -2,6 +2,7 @@
 
 {% block content %}
 	
+
 	<form action="{% url 'log:login' %}" method="POST">
 
 	{% csrf_token %}
@@ -10,5 +11,6 @@
 	<button>Submit</button>
 
 </form>
+
 
 {% endblock %}

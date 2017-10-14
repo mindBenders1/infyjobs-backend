@@ -16,8 +16,11 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+<<<<<<< HEAD
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
+=======
+>>>>>>> 0120d75396f3d44a94c5bb244fe998982b2ff3ff
 
 
 # Quick-start development settings - unsuitable for production
@@ -44,7 +47,10 @@ INSTALLED_APPS = [
     'log',
     'profiles',
     'jobs',
+<<<<<<< HEAD
     'assessment',
+=======
+>>>>>>> 0120d75396f3d44a94c5bb244fe998982b2ff3ff
 ]
 
 MIDDLEWARE = [
@@ -125,7 +131,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 STATICFILES_DIRS = [STATIC_DIR,]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
+=======
+>>>>>>> 0120d75396f3d44a94c5bb244fe998982b2ff3ff

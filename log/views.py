@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 from .models import CompanyRegister
 
+
 def register(request):
 	registered = False
 	if request.method == 'POST':
@@ -53,7 +54,6 @@ def user_login(request):
 def user_logout(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('home:index'))
-
 
 
 
