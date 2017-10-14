@@ -6,3 +6,99 @@
 .navbar a {
 	color: #FFFFFF;
 }
+
+.nav > li > a:focus, .nav > li > a:hover {
+    background: none !important;
+}
+
+/* login-section */
+
+@import "bourbon";
+
+body {
+	background: #eee !important;
+}
+
+.wrapper {
+	margin-top: 50px;
+  margin-bottom: 80px;
+}
+
+.form-login, .form-register {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.form-login h2, .form-register h2 {
+	color:#3097D1;
+	font-family: 'Zilla Slab', serif;
+	margin-left: -10px;
+}
+
+  .form-login-heading,.form-register-heading ,.checkbox {
+	  margin-bottom: 30px;
+	}
+
+	.checkbox {
+	  font-weight: normal;
+		padding-left: 100px;
+	}
+
+	.form-login p, .form-register p {
+		color: #009bf9;
+	}
+
+	#id_username, #id_password, #id_first_name, #id_last_name, #id_email {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+		color: #333;
+	  padding: 5px;
+		border: 2px solid  #D3D3D3;
+		border-radius: 4px;
+		margin-left: 5px;
+	}
+	@include box-sizing(border-box);
+
+	&:focus {
+	  z-index: 2;
+	}
+
+	#id_username {
+		margin-left: 7px;
+		padding-left: 6px;
+	}
+
+	 #id_email {
+		 margin-left: 84px;
+		 padding-left: 6px;
+	 }
+
+	 #id_password {
+		 margin-left: 7px;
+		 padding-left: 6px;
+	 }
+
+	.helptext {
+		display: none;
+	}
+
+	input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+	}
+
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+}
+
+/* home-section-starts */
+
+/* home-section-ends */

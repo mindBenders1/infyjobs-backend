@@ -1,14 +1,17 @@
 {% extends '../log/base.html' %}
 
 {% block content %}
-	
 
-	<form action="{% url 'log:register' %}" method="POST">
-	{% csrf_token %}
-	{{ user_form.as_p }}
-	<button class="btn btn-block btn-primary">Submit</button>
 
-</form>
 
+<div class="wrapper">
+	<form class="form-register" action="{% url 'log:register' %}" method="POST">
+	 <h2 class="form-register-heading" style="text-align:center;">Register</h2>
+	 {% csrf_token %}
+ 	 {{ user_form.as_p }}
+
+	 <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+ </form>
+</div>
 
 {% endblock %}

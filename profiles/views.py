@@ -65,4 +65,4 @@ def add_member(request):
 
 class EditProfileView(UpdateView):
 	model = UserProfile
-	fields = '__all__'
+	fields = ['nationality','profile_pic','contact_no','dob','school','tenth_cent','twelth_cent','college','course','cgpa','college_cent','more_courses','bio','expertise','skills','website','resume','created']
