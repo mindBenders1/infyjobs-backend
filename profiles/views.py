@@ -15,8 +15,9 @@ def ShowProfile(request):
 	return render(request, 'profiles/profile.html', {'user_profile':user_profile})
 
 
-class CreateUserProfileView(CreateView):
+class CreateUserProfileView(UpdateView):
 	model = UserProfile
+	exclude = ['username']
 	
 
 

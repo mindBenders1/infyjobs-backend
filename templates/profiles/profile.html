@@ -1,6 +1,8 @@
 {% extends '../log/base.html' %}
 
 {% block content %}
+<a href="{% url 'profiles:edit_profile' user_profile.pk %}"><button class="">Edit</button></a>
+
 <p>{{ user_profile.user.first_name }} {{ user_profile.user.last_name }}</p>
 <p>{{ user_profile.user.email }}</p>
 <p>{{ user_profile.nationality }}</p>
