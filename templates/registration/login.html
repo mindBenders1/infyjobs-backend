@@ -1,16 +1,19 @@
 {% extends '../log/base.html' %}
 
 {% block content %}
-	
 
-	<form action="{% url 'log:login' %}" method="POST">
+	<div class="wrapper">
+	  <form class="form-login" action="{% url 'log:login' %}" method="POST">
+		 <h2 class="form-login-heading" style="text-align:center;">Log In</h2>
+		 {% csrf_token %}
 
-	{% csrf_token %}
-
-	{{ form.as_p }}
-	<button>Submit</button>
-
-</form>
+		 {{ form.as_p }}
+		 <label class="checkbox">
+			 <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+		 </label>
+		 <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+	 </form>
+  </div>
 
 
 {% endblock %}
