@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'log',
     'profiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'infyjobs.wsgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES' : (
+            'rest_framework.permissions.IsAdminUser',
+        ),
+}
 
 
 # Database

@@ -65,11 +65,12 @@ class AddProject(models.Model):
 
 #company
 class AddMembers(models.Model):
+	member = models.OneToOneField(User)
 	company = models.OneToOneField(CompanyRegister)
 
-	name = models.CharField(max_length=1024)
-	email = models.EmailField()
-	password = models.CharField(max_length=20)
+	# name = models.CharField(max_length=1024)
+	# email = models.EmailField()
+	# password = models.CharField(max_length=20)
 	contact_no = models.IntegerField()
 	landline = models.IntegerField()
 	designation = models.CharField(max_length=255)
