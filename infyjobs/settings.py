@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'log',
     'profiles',
-    'rest_framework',
     'jobs',
 ]
 
@@ -75,14 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'infyjobs.wsgi.application'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES' : (
-            'rest_framework.permissions.IsAdminUser',
-        ),
-}
 
-
-# Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
