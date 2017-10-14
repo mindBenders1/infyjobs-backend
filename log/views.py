@@ -10,6 +10,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import CompanyRegister
 
+def index(request):
+	return render(request, './index.html', {})
 
 def register(request):
 	registered = False
