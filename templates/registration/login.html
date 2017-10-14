@@ -1,0 +1,14 @@
+{% extends '../log/base.html' %}
+
+{% block content %}
+	
+	<form action="{% url 'log:login' %}" method="POST">
+
+	{% csrf_token %}
+
+	{{ form.as_p }}
+	<button>Submit</button>
+
+</form>
+
+{% endblock %}
