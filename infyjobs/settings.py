@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'log',
     'profiles',
     'rest_framework',
+    'jobs',
 ]
 
 MIDDLEWARE = [
