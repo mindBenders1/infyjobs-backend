@@ -31,7 +31,7 @@ class UserProfile(models.Model):
 	expertise = models.CharField(max_length=1024)
 	skills = models.CharField(max_length=5000)
 	website = models.URLField()
-	resume = models.ImageField(upload_to= 'userprofile/cv')
+	resume = models.FileField(upload_to= 'userprofile/cv')
 	created = models.DateTimeField(default=datetime.datetime.now)
 
 

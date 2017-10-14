@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from .models import UserProfile
+from .models import UserProfile, AddMembers
 
 # Create your views here.
 def index(request):
@@ -28,7 +28,7 @@ def CreateUserProfileView(request):
 		expertise = request.POST['expertise']
 		skills = request.POST['skills']
 		website = request.POST['website']
-		resume = request.POST['resume']
+		resume = request.FILES['resume']
 		created = request.POST['created']
 
 		UserProfile.objects.create(
@@ -56,3 +56,5 @@ def CreateUserProfileView(request):
 	return HttpResponse('')
 
 
+def add_member(request):
+	return HttpResponse('')
