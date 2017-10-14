@@ -6,13 +6,42 @@
 {{ question_paper.subject }}<br>
 {% endfor %}
 
-
+<div class="container col-md-4">
+	<ul>
+	{% for question in questions %}
+		<li id="{{ forloop.counter }}" onclick="change_question(this.id)" >Question {{ forloop.counter }}</li>
+	{% endfor %}
+	</ul>
+</div>
 {% for question in questions %}
-	{{ question.ques }}<br>
-	{{ question.opt1 }}<br>
-	{{ question.opt2 }}<br>
-	{{ question.opt3 }}<br>
-	{{ question.opt4 }}<br><br><br>
+	{% if forloop.first %}
+	<div class="container col-md-8 act" id="ques{{ forloop.counter }}">
+		{{ question.ques }}<br>
+		{{ question.opt1 }}<br>
+		{{ question.opt2 }}<br>
+		{{ question.opt3 }}<br>
+		{{ question.opt4 }}<br><br><br>
+	</div>
+
+	{% else %}
+	<div class="container col-md-8 hidden" id="ques{{ forloop.counter }}">
+		{{ question.ques }}<br>
+		{{ question.opt1 }}<br>
+		{{ question.opt2 }}<br>
+		{{ question.opt3 }}<br>
+		{{ question.opt4 }}<br><br><br>
+	</div>
+	{% endif %}
 {% endfor %}
+
+
+<script>
+	function change_question(id){
+		$(".act").addClass("hidden");
+		$(".act").removeClass("act");
+		$("#ques"+id).removeClass("hidden");
+		$("#ques"+id).addClass("act");
+	}
+</script>
 
 {% endblock %}
