@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 from .models import CompanyRegister
 
 
@@ -59,6 +61,10 @@ def user_logout(request):
 def dashboard(request):
 	return render(request, 'log/dashboard.html', {})
 
+class CompanyRegisterView(CreateView):
+	model = CompanyRegister
+	fields = '__all__'
+
 
 
 
@@ -85,29 +91,6 @@ def dashboard(request):
 	# return render(request, 'registration/user_register.html',{'registered':registered, 'user_form': user_form})
 
 
-def company_register(request):
-	if request.method == 'POST':
-		company_name = request.POST['company_name']
-		representative = request.POST['representative']
-		website = request.POST['website']
-		contact_no = request.POST['contact_no']
-		office_address = request.POST['office_address']
-		city = request.POST['city']
-		state = request.POST['state']
-		country = request.POST['country']
-		CompanyRegister.objects.create(
-			company_name=company_name, 
-			representative=representative, 
-			website=website, 
-			contact_no=contact_no,
-			office_address=office_address,
-			city=city,
-			state=state,
-			country=country,
-			)
-
-
-	return HttpResponse('')
 
 
 

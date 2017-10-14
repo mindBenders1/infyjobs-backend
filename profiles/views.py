@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-
-from .models import UserProfile, AddMembers
+from .models import UserProfile
+from .forms import UserProfileForm, MemberForm, ExperienceForm, ProjectForm
 
 # Create your views here.
 # def index(request):
@@ -14,11 +14,49 @@ def ShowProfile(request):
 	user_profile = UserProfile.objects.get(user=request.user)
 	return render(request, 'profiles/profile.html', {'user_profile':user_profile})
 
+@login_required
+def CreateUserProfileView(request):
+	if request.method == 'POST':
+		profile_form = UserProfileForm(data=request.POST)
+		experience_form = ExperienceForm(data=request.POST)
+		project_form = ProjectForm(data=request.POST)
 
-class CreateUserProfileView(UpdateView):
-	model = UserProfile
-	exclude = ['username']
-	
+
+		if profile_form.is_valid() and experience_form.is_valid() and project_form:
+
+			profile = profile_form.save(commit=False)
+			profile.user = user
+
+			if 'profile_pic' in request.FILES:
+				profile.profile_pic = request.FILES['profile_pic']
+
+			if 'resume' in request.FILES:
+				profile.resume = request.Files['resume']
+
+			profile.save()
+
+
+			experience = experience_form.save()
+			project = profile_form.save()
+	else:
+		profile_form = UserProfileForm()
+		experience_form = ExperienceForm()
+		project_form = ProjectForm()
+	return render(request, 'profiles/userprofile_form.html', {'profile_form':profile_form, 'experience_form':experience_form, 'project_form':project_form})
+
+
+
+
+
+
+
+
+
+
+
+# class CreateUserProfileView(UpdateView):
+# 	model = UserProfile
+# 	fields = '__all__'	
 
 
 

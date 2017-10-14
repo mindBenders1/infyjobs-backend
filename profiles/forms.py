@@ -24,7 +24,7 @@ class ProjectForm(forms.ModelForm):
 		fields = ['title', 'created_on', 'description']
 
 
-class MemberForm(models.ModelForm):
+class MemberForm(forms.ModelForm):
 	class Meta:
 		model = AddMembers
 		fields = '__all__'
