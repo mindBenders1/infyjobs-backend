@@ -6,7 +6,8 @@ app_name = 'log'
 
 urlpatterns = [
 	url(r'login/$', login, name='login'),
-	url(r'logout/$', logout, name='logout'),
+	url(r'logout/$', views.user_logout, name='logout'),
 	url(r'register/$', views.register, name='register'),
+	url(r'dashboard/$', views.dashboard, name='dashboard')
 	
 ]
