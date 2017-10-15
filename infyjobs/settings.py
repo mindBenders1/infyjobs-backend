@@ -18,8 +18,6 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -29,7 +27,7 @@ SECRET_KEY = '(3s_!2que3c4(1vf=f4_vrrun$a+^*9kn#*p6=^e29l5czee2m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['f104b17f.ngrok.io','localhost',]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -125,7 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [STATIC_DIR,]
 
 MEDIA_URL = '/media/'

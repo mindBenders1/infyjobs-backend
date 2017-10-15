@@ -1,30 +1,28 @@
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from .models import CreateJob
 from .forms import CreateJobForm
 # Create your views here.
 
+
 def createJobView(request):
 	if request.method == 'POST':
-		job_title = request.POST['job_title']
-		job_position = request.POST['job_position']
-		job_qualification = request.POST['job_qualification']
-		no_of_vacancy = request.POST['no_of_vacancy']
-		job_description = request.POST['job_description']
-		job_created = request.POST['job_created']
-		job_last_date = request.POST['job_last_date']
+		job_form = CreateJobForm(data=request.POST)
 
-		CreateJob.objects.create(
-			job_title = job_title,
-			job_position = job_position,
-			job_qualification = job_qualification,
-			no_of_vacancy = no_of_vacancy,
-			job_description = job_description,
-			job_created = job_created,
-			job_last_date = job_last_date
-			)
-	return HttpResponse('')
+		if job_form.is_valid():
+			job = job_form.save()
+			return render(request, 'log/index.html', {})
 
+	else:
+		job_form = CreateJobForm()
+
+	return render(request, 'jobs/createjob_form.html', {'job_form': job_form})
 
 def showJobs(request):
 	jobs = CreateJob.objects.all()
-	return HttpResponse('')
+	return render(request, 'jobs/show.html', {'jobs':jobs})
+
+
+def jobDetail(request,pk):
+	job = CreateJob.objects.get(pk=pk)
+	return render(request, 'jobs/job_detail.html', {'job':job})

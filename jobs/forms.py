@@ -2,5 +2,7 @@ from django import forms
 from .models import CreateJob
 
 class CreateJobForm(forms.ModelForm):
-	model = CreateJob
+	class Meta:
+		model = CreateJob
+		fields = '__all__'
 

@@ -1,0 +1,32 @@
+{% extends '../log/base.html' %}
+
+{% block content %}
+
+
+<div class="form-style">
+	<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+        <h1 class="center">Edit Profile</h1>
+	
+		<fieldset>
+			<div class="form-group">
+
+				<div class="field">
+				Name: {{ user.first_name }} {{ user.last_name }}
+				{{ profile_form.as_p }}
+				</div>
+
+			
+
+			</div>
+			</fieldset>
+		
+	<div class="form-group">
+        <button type="submit" class="btn-block">Submit</button>
+	    </div>
+
+    </form>
+</div>
+
+
+{% endblock %}

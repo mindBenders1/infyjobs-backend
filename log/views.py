@@ -33,26 +33,6 @@ def register(request):
 	return render(request, 'registration/user_register.html', {'registered':registered, 'user_form': user_form })
 
 
-# def user_login(request):
-# 	if request.method == 'POST':
-# 		username = request.POST.get("username")
-# 		password = request.POST.get("password")
-
-# 		user = authenticate(username=username, password=password)
-
-# 		if user:
-# 			if user.is_active:
-# 				login(request, user)
-# 				return HttpResponseRedirect(reverse('log:dashboard'))
-# 			else:
-# 				return HttpResponse("Account is not active")
-# 		else:
-# 			print("someone tried to login with wrong credentials")
-
-# 			return HttpResponse("invalid credentials")
-# 	else:
-# 		return render(request, 'registration/login.html', {})
-
 
 @login_required
 def user_logout(request):
@@ -71,26 +51,6 @@ class CompanyRegisterView(CreateView):
 
 
 
-
-
-
-
-
-
-	# if request.method == 'POST':
-	# 	user_form = UserForm(data=request.POST)
-
-	# 	if user_form.is_valid():
-	# 		user = user_form.save()
-	# 		user.set_password(user.password)
-	# 		user.save()
-
-	# 		registered = True
-	# 	else:
-	# 		print(user_form.errors)
-	# else:
-	# 	user_form = UserForm()
-	# return render(request, 'registration/user_register.html',{'registered':registered, 'user_form': user_form})
 
 
 

@@ -1,0 +1,10 @@
+{% extends '../log/base.html' %}
+
+{% block content %}
+	<ul>
+	{% for job in jobs %}
+		<li><a href="{% url 'jobs:job_detail' job.pk %}">{{job.job_title}}</a></li><br>
+	{% endfor %}
+</ul>
+
+{% endblock %}
