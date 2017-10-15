@@ -3,7 +3,7 @@ from profiles.models import AddMembers
 from datetime import datetime
 # Create your models here.
 class CreateJob(models.Model):
-	company_details = models.OneToOneField(AddMembers)
+	company_details = models.ForeignKey(AddMembers)
 
 	job_title = models.CharField(max_length=255)
 	job_position = models.CharField(max_length=255)

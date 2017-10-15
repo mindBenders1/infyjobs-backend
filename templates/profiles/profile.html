@@ -1,0 +1,96 @@
+{% extends '../log/base.html' %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+			<A href="{% url 'profiles:edit_profile' user_profile.pk %}" >Edit Profile</A>
+
+			<br>
+			<p class=" text-info">May 05,2014,03:00 pm </p>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">{{ user_profile.user.first_name }} {{ user_profile.user.last_name }}</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+
+              <div class=" col-md-9 col-lg-9 "> 
+              	<table class="table table-user-information">
+              		<tbody>
+              			<tr>
+              				<td>Email:</td>
+              				<td>{{user_profile.user.email}}</td>
+              			</tr>
+              			<tr>
+              				<td>Nationality:</td>
+              				<td>{{user_profile.nationality}}</td>
+              			</tr>
+              			<tr>
+              				<td>Date of Birth</td>
+              				<td>{{ user_profile.dob }}</td>
+              			</tr>
+              			<tr>
+              				<td>Tenth Percent</td>
+              				<td>{{ user_profile.tenth_cent }}</td>
+              			</tr>
+              			<td>Twelth Percent</td>
+              			<td>{{ user_profile.twelth_cent }}</td>	
+              		</tr>
+              		<tr>
+              			<td>College Name</td>
+              			<td>{{ user_profile.college }}</td>
+              		</tr>
+              		<tr>
+              			<td>Course</td>
+              			<td>{{ user_profile.course }}</td>
+              		</tr>
+              		<tr>
+              			<td>Collage CGPA</td>
+              			<td>{{ user_profile.cgpa }}</td>
+              		</tr>
+              		<tr>
+              			<td>Collage Percent</td>
+              			<td>{{ user_profile.college_cent }}</td>
+              		</tr>
+              		<tr>
+              			<td>More Courses</td>
+              			<td>{{ user_profile.more_courses }}</td>
+              		</tr>
+              		<tr>
+              			<td>Bio</td>
+              			<td>{{ user_profile.bio }}</td>
+              		</tr>
+              		<tr>
+              			<td>Expertise</td>
+              			<td>{{ user_profile.expertise }}</td>
+              		</tr>
+              		<tr>
+              			<td>Skills</td>
+              			<td>{{ user_profile.skills }}</td>
+              		</tr>
+              		<tr>
+              			<td>Website</td>
+              			<td>{{ user_profile.website }}</td>
+              		</tr>
+              		<tr>
+              			<td>Resume</td>
+              			<td>{{ user_profile.resume }}</td>
+              		</tr>
+              	</tbody>
+              </table>
+
+          </div>
+      </div>
+  </div>
+  
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
