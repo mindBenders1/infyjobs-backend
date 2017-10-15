@@ -2,104 +2,53 @@
 
 {% block content %}
 
-{% for question_paper in question_papers %}
-{{ question_paper.subject }}<br>
-{% endfor %}
-
-<div class="container col-md-4">
-	<ul>
-	{% for question in questions %}
-		<li id="{{ forloop.counter }}" onclick="change_question(this.id)" >Question {{ forloop.counter }}</li>
-	{% endfor %}
-	</ul>
-</div>
 {% for question in questions %}
-	{% if forloop.first %}
-	<div class="container col-md-6 act" id="ques{{ forloop.counter }}">
+{% csrf_token %}
+	<div class="container col-md-10" id="ques{{ forloop.counter }}">
 		<form>
 			Q. {{ question.ques }}<br>
 			<ul>
-				<li><input type="radio" name="opt{{ forloop.counter }}" value="{{ question.opt1 }}">{{ question.opt1 }}</li><br>
-				<li><input type="radio" name="opt{{ forloop.counter }}" value="{{ question.opt2 }}">{{ question.opt2 }}</li><br>
-				<li><input type="radio" name="opt{{ forloop.counter }}" value="{{ question.opt3 }}">{{ question.opt3 }}</li><br>
-				<li><input type="radio" name="opt{{ forloop.counter }}" value="{{ question.opt4 }}">{{ question.opt4 }}</li><br>
-			</ul>
-			<button type="button" onclick="change_question({{ forloop.counter }} + 1)">Submit</button>
-		</form>
-	</div>
-
-	{% elif forloop.last %}
-	<div class="container col-md-6 hidden" id="ques{{ forloop.counter }}">
-		<form>
-			Q. {{ question.ques }}<br>
-			<ul>
-				<li><input type="radio" id="opt{{ forloop.counter }}1" name="opt{{ forloop.counter }}" value="{{ question.opt1 }}">{{ question.opt1 }}</li><br>
-				<li><input type="radio" id="opt{{ forloop.counter }}2" name="opt{{ forloop.counter }}" value="{{ question.opt2 }}">{{ question.opt2 }}</li><br>
-				<li><input type="radio" id="opt{{ forloop.counter }}3" name="opt{{ forloop.counter }}" value="{{ question.opt3 }}">{{ question.opt3 }}</li><br>
-				<li><input type="radio" id="opt{{ forloop.counter }}4" name="opt{{ forloop.counter }}" value="{{ question.opt4 }}">{{ question.opt4 }}</li><br>
+				<li><input type="radio" onclick="evaluateAnswers(this)" id="{{ forloop.counter }}" name="opt{{ forloop.counter }}" value="{{ question.opt1 }}">{{ question.opt1 }}</li><br>
+				<li><input type="radio" onclick="evaluateAnswers(this)" id="{{ forloop.counter }}" name="opt{{ forloop.counter }}" value="{{ question.opt2 }}">{{ question.opt2 }}</li><br>
+				<li><input type="radio" onclick="evaluateAnswers(this)" id="{{ forloop.counter }}" name="opt{{ forloop.counter }}" value="{{ question.opt3 }}">{{ question.opt3 }}</li><br>
+				<li><input type="radio" onclick="evaluateAnswers(this)" id="{{ forloop.counter }}" name="opt{{ forloop.counter }}" value="{{ question.opt4 }}">{{ question.opt4 }}</li><br>
+				<input type="hidden" id="ans{{ forloop.counter }}" value="{{ question.ans }}">
 			</ul>
 		</form>
 	</div>
-
-	{% else %}
-	<div class="container col-md-6 hidden" id="ques{{ forloop.counter }}">
-		<form>
-			Q. {{ question.ques }}<br>
-			<ul>
-				<li><input type="radio" id="opt{{ forloop.counter }}1" name="opt{{ forloop.counter }}" value="{{ question.opt1 }}">{{ question.opt1 }}</li><br>
-				<li><input type="radio" id="opt{{ forloop.counter }}2" name="opt{{ forloop.counter }}" value="{{ question.opt2 }}">{{ question.opt2 }}</li><br>
-				<li><input type="radio" id="opt{{ forloop.counter }}3" name="opt{{ forloop.counter }}" value="{{ question.opt3 }}">{{ question.opt3 }}</li><br>
-				<li><input type="radio" id="opt{{ forloop.counter }}4" name="opt{{ forloop.counter }}" value="{{ question.opt4 }}">{{ question.opt4 }}</li><br>
-				<button type="button" onclick="change_question({{ forloop.counter }} + 1)">Submit</button>
-			</ul>
-		</form>
-	</div>
-
-	{% endif %}
-	}
 {% endfor %}
 <div class="container col-md-2">
-	<button class="btn btn-primary" onclick="evaluateAnswers()">End Test</button>
+	<button class="btn btn-primary" onclick="sendMarks()">End Test</button>
 </div>
 
 
 <script>
+	var marks = 0;
 	function change_question(id){
-		$(".act").addClass("hidden");
-		$(".act").removeClass("act");
-		$("#ques"+id).removeClass("hidden");
-		$("#ques"+id).addClass("act");
+		var prev_id = id-1;
+		
 	};
 
-	function evaluateAnswers(){
-		var data = [];
-		for(i=0; i<10; i++){
-			var answer;
-			if($('#opt'+i+'1').checked){
-				answer = $('#opt'+i+'1').value()
-			}
-			else if($('#opt'+i+'2').checked){
-				answer = $('#opt'+i+'2').value()
-			}
-			else if($('#opt'+i+'3').checked){
-				answer = $('#opt'+i+'3').value()
-			}
-			else if($('#opt'+i+'4').checked){
-				answer = $('#opt'+i+'4').value()
-			}
-			console.log(answer)
-			data.push(answer);
+	function evaluateAnswers(el){
+		var answer = el.value;
+		var i = el.id;
+		var real_answer = document.getElementById('ans'+i).value;
+		if(answer == real_answer) marks = marks+1;
+		console.log(marks);
+		if(i < 10){
+			$("#ques"+i).addClass("hidden");
 		}
-		$.extend({}, data);
-		console.log(data);
-		/*$.ajax({
-            type: 'POST',
-            url: '/assessment/test/evaluate/',
-            data: data,
-            success:function(){
-                console.log("done");
-            }
-        });*/
+	};
+
+	function sendMarks(){
+		$.ajax({
+				type: 'POST',
+				url: '/assessment/get_marks/',
+				data: {
+					marks: marks,
+					csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+				},
+			});
 	}
 </script>
 

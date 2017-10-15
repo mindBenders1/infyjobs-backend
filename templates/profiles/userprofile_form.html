@@ -2,11 +2,11 @@
 
 {% block content %}
 
-
+<div style="margin: 2% 10%">
 <div class="form-style">
 	<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
-        <h1 class="center">Edit Profile</h1>
+        <h1 class="center">Create your Profile</h1>
 	
 		<fieldset>
 			<div class="form-group">
@@ -66,8 +66,8 @@
   </div>
 </div>
 <hr>
-
-
+</div>
+</div> 
 <script>
 	var d = document.querySelectorAll("p");
 	for(var i=0;i<d.length;i++){

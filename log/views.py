@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth.views import logout
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -21,7 +22,7 @@ def register(request):
 		user_form = UserForm(data=request.POST)
 
 		if user_form.is_valid():
-			user = user_form.save()
+			user = user_form.save(commit=False)
 			user.set_password(user.password)
 			user.save()
 
@@ -47,8 +48,8 @@ def dashboard(request):
 		user_profile = UserProfile.objects.get(user=request.user)
 		profile_created = True
 		marks = user_profile.marks
+		skill = user_profile.skills
 		if marks == 0:
-			skill = user_register.skills
 			eligible = CreateJob.objects.filter(skill_required=skill)
 		else:
 			eligible = CreateJob.objects.filter(marks_required__lte=marks)
