@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import CompanyRegister
+from jobs.models import CreateJob
+from profiles.models import UserProfile
 
 def index(request):
 	return render(request, 'log/index.html', {})
@@ -41,7 +43,20 @@ def user_logout(request):
 
 @login_required
 def dashboard(request):
-	return render(request, 'log/dashboard.html', {})
+	if UserProfile.objects.filter(user=request.user).exists():
+		user_profile = UserProfile.objects.get(user=request.user)
+		profile_created = True
+		marks = user_profile.marks
+		if marks == 0:
+			skill = user_register.skills
+			eligible = CreateJob.objects.filter(skill_required=skill)
+		else:
+			eligible = CreateJob.objects.filter(marks_required__lte=marks)
+			eligible = eligible.filter(skill_required=skill)
+		return render(request, 'log/dashboard.html', {'profile_created': profile_created, 'eligible':eligible, 'marks':marks})
+	else:
+		profile_created = False
+		return render(request, 'log/dashboard.html', {'profile_created': profile_created})
 
 class CompanyRegisterView(CreateView):
 	model = CompanyRegister

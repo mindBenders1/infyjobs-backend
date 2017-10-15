@@ -4,8 +4,18 @@
 <h1>hey {{ user.first_name }} </h1>
 
 <ul>
-	<a href="{% url 'profiles:create_profile' %}"><li>Create profile</li></a>
+	{% if profile_created %}
 	<a href="{% url 'profiles:show_profile' %}"><li>Show profile</li></a>
+	{% for el in eligible %}
+		{{ el.job_title }}
+		{{ el.job_position }}
+		{{ el.job_qualification }}
+		{{ el.job_last_date }}
+		<a href="{% url 'jobs:job_detail' el.pk %}"><button>Apply</button></a>
+	{% endfor %}
+	{% else %}
+	<a href="{% url 'profiles:create_profile' %}"><li>Create profile</li></a>
+	{% endif %}
 
 </ul>
 

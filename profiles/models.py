@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 
 	nationality = models.CharField(max_length=255)
-	profile_pic = models.ImageField(upload_to='user_profile/profile_pic')
+	profile_pic = models.ImageField(upload_to='user_profile/profile_pic',default='user_profile/profile_pic/logo-2.jpg')
 	contact_no = models.IntegerField()
 	dob = models.DateField()
 	school = models.CharField(max_length=255)
@@ -31,8 +31,9 @@ class UserProfile(models.Model):
 	expertise = models.CharField(max_length=1024)
 	skills = models.CharField(max_length=5000)
 	website = models.URLField()
-	resume = models.FileField(upload_to= 'userprofile/cv')
+	resume = models.FileField(upload_to= 'userprofile/cv',default='userprofile/cv/google.png')
 	created = models.DateTimeField(default=datetime.datetime.now)
+	marks = models.IntegerField(default=0)
 
 
 	def __str__(self):

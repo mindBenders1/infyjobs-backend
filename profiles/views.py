@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse
 
 from .models import UserProfile
 from .forms import UserProfileForm, MemberForm, ExperienceForm, ProjectForm
@@ -22,27 +24,28 @@ def CreateUserProfileView(request):
 		project_form = ProjectForm(data=request.POST)
 
 
-		if profile_form.is_valid() and experience_form.is_valid() and project_form:
+		if profile_form.is_valid():
 
 			profile = profile_form.save(commit=False)
-			profile.user = user
+			profile.user = request.user
 
 			if 'profile_pic' in request.FILES:
 				profile.profile_pic = request.FILES['profile_pic']
 
 			if 'resume' in request.FILES:
-				profile.resume = request.Files['resume']
+				profile.resume = request.FILES['resume']
 
 			profile.save()
+			return HttpResponseRedirect(reverse('log:dashboard'))
 
 
-			experience = experience_form.save()
-			project = profile_form.save()
+			# experience = experience_form.save()
+			# project = profile_form.save()
 	else:
 		profile_form = UserProfileForm()
-		experience_form = ExperienceForm()
-		project_form = ProjectForm()
-	return render(request, 'profiles/userprofile.html', {'profile_form':profile_form, 'experience_form':experience_form, 'project_form':project_form})
+		# experience_form = ExperienceForm()
+		# project_form = ProjectForm()
+	return render(request, 'profiles/userprofile.html', {'profile_form':profile_form})
 
 
 

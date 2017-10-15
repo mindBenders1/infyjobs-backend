@@ -12,6 +12,8 @@ class CreateJob(models.Model):
 	job_description = models.TextField()
 	job_created_date = models.DateField(default=datetime.now)
 	job_last_date = models.DateField()
+	marks_required = models.IntegerField()
+	skill_required = models.CharField(max_length=100)
 
-	def _str__(self):
-		return self.comapany_details.comapany.comapany_name + self.job_title
+	def __str__(self):
+		return self.company_details.company.company_name + '-' +self.job_title
